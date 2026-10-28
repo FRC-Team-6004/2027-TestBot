@@ -1,6 +1,9 @@
 package first.robot.constants;
 
 import static first.robot.constants.RobotConstants.*;
+import static org.wpilib.units.Units.RPM;
+
+import org.wpilib.units.measure.AngularVelocity;
 
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -12,6 +15,11 @@ import com.ctre.phoenix6.signals.InvertedValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 
 public class FlywheelConstants {
+
+    public static final AngularVelocity FAST_FORWARD_VELOCITY = RPM.of(100);
+    public static final AngularVelocity SLOW_FORWARD_VELOCITY = RPM.of(55);
+
+    
     // TODO: Update the Motor ID with the actual value (Should stay on MAIN_BUS)
     public static final int MOTOR_ID = 1;
     public static final CANBus BUS = MAIN_BUS;  
