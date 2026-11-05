@@ -1,13 +1,12 @@
 package first.robot.OpModes;
 
+import org.wpilib.opmode.OpMode;
 import org.wpilib.opmode.Teleop;
 
 import first.robot.Robot;
-import first.robot.mechanisms.Flywheel;
 
 @Teleop
-public class FlywheelTeleOp {
-    private final Flywheel m_flywheel = new Flywheel();
+public class FlywheelTeleOp implements OpMode{
 
     public FlywheelTeleOp(Robot robot) {
         // Add other gamepad bindings for controlling the flywheel mechanism
@@ -18,11 +17,11 @@ public class FlywheelTeleOp {
         // top face - slow backward
         // left face - fast backward 
 
-        robot.gamepad.start().onTrue(m_flywheel.stop());
-        robot.gamepad.faceDown().onTrue(m_flywheel.runSlow());
-        robot.gamepad.faceRight().onTrue(m_flywheel.runFast());
-        robot.gamepad.faceUp().onTrue(m_flywheel.runSlowBackward());
-        robot.gamepad.faceLeft().onTrue(m_flywheel.runFastBackward());
+        robot.gamepad.start().onTrue(robot.m_flywheel.stop());
+        robot.gamepad.faceDown().onTrue(robot.m_flywheel.runSlow());
+        robot.gamepad.faceRight().onTrue(robot.m_flywheel.runFast());
+        robot.gamepad.faceUp().onTrue(robot.m_flywheel.runSlowBackward());
+        robot.gamepad.faceLeft().onTrue(robot.m_flywheel.runFastBackward());
 
 
     }
