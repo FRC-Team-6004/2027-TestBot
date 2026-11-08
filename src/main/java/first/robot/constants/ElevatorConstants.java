@@ -1,45 +1,45 @@
 package first.robot.constants;
 
 import static first.robot.constants.RobotConstants.*;
+import static org.wpilib.units.Units.Amps;
 
-import com.ctre.phoenix6.CANBus;
-import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
-import com.ctre.phoenix6.configs.FeedbackConfigs;
-import com.ctre.phoenix6.configs.MotorOutputConfigs;
-import com.ctre.phoenix6.configs.Slot0Configs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
-import com.ctre.phoenix6.signals.GravityTypeValue;
-import com.ctre.phoenix6.signals.InvertedValue;
-import com.ctre.phoenix6.signals.NeutralModeValue;
+import org.wpilib.hardware.bus.CANPort;
+
+import com.revrobotics.spark.ClosedLoopSlot;
+import com.revrobotics.spark.FeedbackSensor;
+import com.revrobotics.spark.config.ClosedLoopConfig;
+import com.revrobotics.spark.config.SparkBaseConfig;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+
+
 
 public class ElevatorConstants {
-    // TODO: Update the Motor ID with the actual value (Should stay on MAIN_BUS)
-    public static final int MOTOR_ID = 1;
-    public static final CANBus BUS = MAIN_BUS;  
+    public static final int MOTOR_ID = 15;
+    public static final CANPort PORT = CANPort.CAN_S1;
 
     // TODO: Update the gear ratio with the actual value for the elevator mechanism
-    public static final double GEAR_RATIO = 100; 
+    public static final double MOTOR_ROTATIONS_PER_METER = 100;
 
     // Motor configuration for the elevator mechanism
     // Do not edit without understanding what each option does (feel free to read the documentation or ask for help)
-    public static final TalonFXConfiguration MOTOR_CONFIG = new TalonFXConfiguration()
-            .withSlot0(new Slot0Configs()
-                .withKS(0.1)
-                .withKV(0.1)
-                .withKA(0)
-                .withKG(0)  // Update gravity constant for elevator mechanism
-                .withKP(1)
-                .withKI(0)
-                .withKD(0)
-                .withGravityType(GravityTypeValue.Elevator_Static))
-            .withCurrentLimits(new CurrentLimitsConfigs()
-                .withSupplyCurrentLimit(MAX_TALONFX_SUPPLY_CURRENT)
-                .withSupplyCurrentLimitEnable(true)
-                .withStatorCurrentLimit(MAX_TALONFX_STATOR_CURRENT)
-                .withStatorCurrentLimitEnable(true))
-            .withMotorOutput(new MotorOutputConfigs()
-                .withNeutralMode(NeutralModeValue.Brake)
-                .withInverted(InvertedValue.CounterClockwise_Positive))
-            .withFeedback(new FeedbackConfigs()
-                .withSensorToMechanismRatio(GEAR_RATIO));
+    public static final SparkMaxConfig MOTOR_CONFIG = new SparkMaxConfig();
+
+    static {
+        MOTOR_CONFIG
+            .idleMode(IdleMode.kBrake)
+            .inverted(false)
+            .smartCurrentLimit((int)MAX_MOTOR_SUPPLY_CURRENT.in(Amps))
+            .secondaryCurrentLimit((int)MAX_MOTOR_STATOR_CURRENT.in(Amps));
+
+        /* Broken in the current alpha? 
+        MOTOR_CONFIG.encoder
+            .positionConversionFactor(1.0 / GEAR_RATIO)
+            .velocityConversionFactor(1.0 / GEAR_RATIO / 60.0);
+        */
+
+        MOTOR_CONFIG.closedLoop
+            .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+            .pid(1.0, 0.0, 0.0, ClosedLoopSlot.kSlot0);
+    }
 }
