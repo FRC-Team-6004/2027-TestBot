@@ -13,7 +13,8 @@ public class RobotConstants {
     public static final CANBus MAIN_BUS = new CANBus(CANPort.CAN_S0);
     public static final CANBus SECONDARY_BUS = new CANBus(CANPort.CAN_S1);
 
-    public static final Current MAX_TALONFX_SUPPLY_CURRENT = Amps.of(40);
-    public static final Current MAX_TALONFX_STATOR_CURRENT = Amps.of(60);
+    public static final Current MAX_MOTOR_SUPPLY_CURRENT = Amps.of(40);
+    public static final Current MAX_MOTOR_STATOR_CURRENT = Amps.of(60);
+
 
 }
