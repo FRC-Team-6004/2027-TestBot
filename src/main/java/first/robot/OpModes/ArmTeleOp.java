@@ -12,5 +12,8 @@ public class ArmTeleOp implements OpMode{
         // Add other gamepad bindings for controlling the arm mechanism
         // Example: Dpad Up to move the arm up, trigger to move to the position based on the trigger value
         robot.gamepad.faceRight().onTrue(robot.m_arm.stop());
-    }
+        robot.gamepad.faceUp().onTrue(robot.m_arm.armUp());
+        robot.gamepad.faceLeft().onTrue(robot.m_arm.armDown());
+    }   
+
 }

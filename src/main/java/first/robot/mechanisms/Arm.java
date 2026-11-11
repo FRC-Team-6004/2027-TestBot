@@ -2,11 +2,11 @@ package first.robot.mechanisms;
 
 import org.wpilib.command3.Mechanism;
 import org.wpilib.epilogue.Logged;
-
-
+import org.wpilib.units.measure.Angle;
 import org.wpilib.command3.Command;
 
 import com.ctre.phoenix6.controls.NeutralOut;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import static first.robot.constants.ArmConstants.*; 
@@ -15,6 +15,7 @@ public class Arm implements Mechanism {
     private TalonFX m_motor;
 
     private final NeutralOut m_neutralRequest = new NeutralOut();
+    private final PositionVoltage m_positionRequest = new PositionVoltage(0);
     
     // TODO: Add requests for controlling the arm mechanism (VelocityVoltage, PositionVoltage)
 
@@ -31,12 +32,12 @@ public class Arm implements Mechanism {
     }
 
     public Command armDown() {
-        return setAngle(DOWNANGLE);
+        return setAngle(DOWN_ANGLE);
     }
 
-    public Command setAngle(double angle) {
+    public Command setAngle(Angle angle) {
         return run(coroutine -> {
-            // TODO: Implement the logic to set the arm to the specified angle
+            m_motor.setControl(m_positionRequest.withPosition(angle));
             coroutine.park();
         }).named("set arm angle");
     }

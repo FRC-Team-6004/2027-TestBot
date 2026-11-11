@@ -1,6 +1,9 @@
 package first.robot.constants;
 
 import static first.robot.constants.RobotConstants.*;
+import static org.wpilib.units.Units.Degrees;
+
+import org.wpilib.units.measure.Angle;
 
 import com.ctre.phoenix6.CANBus;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -16,8 +19,8 @@ public class ArmConstants {
     // TODO: Update the Motor ID with the actual value (Should stay on MAIN_BUS)
     public static final int MOTOR_ID = 1;
     public static final CANBus BUS = MAIN_BUS;  
-    public static final double UP_ANGLE = 90;
-    public static final double DOWNANGLE = 180;
+    public static final Angle UP_ANGLE = Degrees.of(90);
+    public static final Angle DOWN_ANGLE = Degrees.of(180);
     // TODO: Update the gear ratio with the actual value for the arm mechanism
     public static final double GEAR_RATIO = 100; 
 
