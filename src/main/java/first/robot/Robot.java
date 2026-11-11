@@ -25,6 +25,7 @@ public class Robot extends OpModeRobot {
   public final CommandGamepad gamepad = new CommandGamepad(GAMEPAD_PORT);
 
   // Mechanisms
+  public final Drive    m_drive    = new Drive();
   public final Arm      m_arm      = new Arm();
   public final Elevator m_elevator = new Elevator();
   public final Flywheel m_flywheel = new Flywheel();
