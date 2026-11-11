@@ -3,6 +3,7 @@ package first.robot.mechanisms;
 import org.wpilib.command3.Command;
 import org.wpilib.command3.Mechanism;
 import org.wpilib.drive.DifferentialDrive;
+import org.wpilib.epilogue.Logged;
 
 import com.revrobotics.PersistMode;
 import com.revrobotics.ResetMode;
@@ -10,7 +11,7 @@ import com.revrobotics.spark.SparkMax;
 import static first.robot.constants.DriveConstants.*;
 
 import java.util.function.Supplier;
-
+@Logged
 public class Drive implements Mechanism {
 
     private final DifferentialDrive differentialDrive;

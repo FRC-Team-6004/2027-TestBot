@@ -1,6 +1,7 @@
 package first.robot.mechanisms;
 
 import org.wpilib.command3.Mechanism;
+import org.wpilib.epilogue.Logged;
 import org.wpilib.units.measure.Distance;
 
 import static org.wpilib.units.Units.Meters;
@@ -15,15 +16,16 @@ import com.revrobotics.spark.SparkLowLevel.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
 import static first.robot.constants.ElevatorConstants.*; 
-
+@Logged
 public class Elevator implements Mechanism {
     private SparkMax m_motor;
 
     public Elevator() {
         m_motor = new SparkMax(PORT, MOTOR_ID, MotorType.kBrushless);
-        m_motor.configure(null, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        m_motor.configure(MOTOR_CONFIG, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         setDefaultCommand(stop());
     }
+    //TODO add methods for controlling the elevator mechanism (e.g., retract, setHeight)
 
     // Extend the distance and holds the position
     public Command Extend(Distance distance) {

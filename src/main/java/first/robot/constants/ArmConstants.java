@@ -16,7 +16,8 @@ public class ArmConstants {
     // TODO: Update the Motor ID with the actual value (Should stay on MAIN_BUS)
     public static final int MOTOR_ID = 1;
     public static final CANBus BUS = MAIN_BUS;  
-
+    public static final double UP_ANGLE = 90;
+    public static final double DOWNANGLE = 180;
     // TODO: Update the gear ratio with the actual value for the arm mechanism
     public static final double GEAR_RATIO = 100; 
 
