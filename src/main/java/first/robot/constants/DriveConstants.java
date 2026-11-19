@@ -1,9 +1,14 @@
 package first.robot.constants;
 
 import static first.robot.constants.RobotConstants.*;
-import static org.wpilib.units.Units.Amps;
+import static org.wpilib.units.Units.*;
 
 import org.wpilib.hardware.bus.CANPort;
+import org.wpilib.math.linalg.VecBuilder;
+import org.wpilib.math.system.DCMotor;
+import org.wpilib.simulation.DifferentialDrivetrainSim;
+import org.wpilib.units.measure.Distance;
+import org.wpilib.units.measure.Mass;
 
 import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.FeedbackSensor;
@@ -20,6 +25,16 @@ public class DriveConstants {
     public static final int RIGHT_FOLLOWER_PORT = 4;
 
     public static final SparkMaxConfig MOTOR_CONFIG = new SparkMaxConfig();
+    public static final double GEAR_RATIO = 10.71; // Update with actual gear ratio for the drive mechanism
+    
+    // TODO: Update the values with real measurements
+    public class SimulationConstants {
+        public static double gearing = 7.29; // Update with actual gear ratio for the drive mechanism
+        public static double interia = 7.0;
+        public static Mass mass = Kilograms.of(60.0); // Update with actual mass of the robot
+        public static Distance wheelRadius = Inches.of(10); // Update with actual wheel radius
+        public static Distance trackWidth = Inches.of(20); // Update with actual track width
+    }
 
     static {
         MOTOR_CONFIG
